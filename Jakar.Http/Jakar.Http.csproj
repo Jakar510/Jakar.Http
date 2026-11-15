@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<!-- Types stay in the Jakar.Extensions namespace, as every package split out of Jakar.Extensions does (MigrationPlan.md). -->
+		<RootNamespace>Jakar.Extensions</RootNamespace>
+		<AssemblyName>Jakar.Http</AssemblyName>
+		<Version>10.1.0</Version>
+		<Title>Jakar.Http</Title>
+		<PackageId>Jakar.Http</PackageId>
+		<Authors>Tyler Stegmaier</Authors>
+		<Description>An HttpClient-based requester (WebRequester) with retries, typed JSON bodies on Jakar.Json, and WebResponse&lt;T&gt; results that carry their errors.</Description>
+		<PackageTags>http httpclient rest requests retry json</PackageTags>
+		<PackageReleaseNotes>10.1.0: initial release. Split out of Jakar.Extensions 10.12.0; the types keep the Jakar.Extensions namespace.</PackageReleaseNotes>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/Jakar510/Jakar.Http</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/Jakar510/Jakar.Http</PackageProjectUrl>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591;IDE0079;CS8424;IDE0046;CS1658</NoWarn>
+		<WarningsAsErrors>Nullable;CS0114;CS9113;IL2026;IL2046;IL2057;IL2067;IL2070;IL2072;IL2075;IL2087;IL2091;IL2111;IL3050;IL3051</WarningsAsErrors>
+		<IsAotCompatible>true</IsAotCompatible>
+		<!-- WebRequesterOptions binds from IConfiguration: source-generated, so it stays trim and AOT safe. -->
+		<EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<!-- Jakar.Json's attributes are [Conditional]: keep them in this assembly's metadata, so [JsonModel] types in other assemblies see them on the members they inherit. -->
+		<DefineConstants>$(DefineConstants);JAKAR_JSON_KEEP_ATTRIBUTES</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Jakar.Extensions" />
+		<PackageReference Include="Jakar.ErrorOr" />
+		<PackageReference Include="JetBrains.Annotations" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+		<PackageReference Include="Microsoft.Extensions.Http" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="Jakar.Http.Tests" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\images\icon.png" Pack="true" PackagePath="\" Visible="false" />
+		<None Include="..\LICENSE.txt" Pack="true" PackagePath="\" Visible="false" />
+		<None Include="README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+</Project>
