@@ -35,6 +35,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Jakar.Extensions" />
+		<PackageReference Include="Jakar.Files" />
 		<PackageReference Include="Jakar.ErrorOr" />
 		<PackageReference Include="JetBrains.Annotations" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" />

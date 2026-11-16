@@ -6,7 +6,7 @@ An HttpClient-based requester (WebRequester) with retries, typed JSON bodies on 
 dotnet add package Jakar.Http
 ```
 
-Split out of [Jakar.Extensions](https://github.com/Jakar510/Jakar.Extensions) in 10.12.0. It depends on [Jakar.Extensions](https://www.nuget.org/packages/Jakar.Extensions/) and [Jakar.ErrorOr](https://www.nuget.org/packages/Jakar.ErrorOr/). The types keep the `Jakar.Extensions` namespace, so code that used them from Jakar.Extensions only needs this package reference (and a recompile).
+Split out of [Jakar.Extensions](https://github.com/Jakar510/Jakar.Extensions) in 10.12.0. It depends on [Jakar.Extensions](https://www.nuget.org/packages/Jakar.Extensions/), [Jakar.Files](https://www.nuget.org/packages/Jakar.Files/) and [Jakar.ErrorOr](https://www.nuget.org/packages/Jakar.ErrorOr/). The types keep the `Jakar.Extensions` namespace, so code that used them from Jakar.Extensions only needs this package reference (and a recompile).
 
 ## What's in it
 

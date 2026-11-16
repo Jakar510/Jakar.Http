@@ -6,10 +6,11 @@
   <ItemGroup>
     <PackageVersion Include="Jakar.ErrorOr" Version="10.1.0" />
     <PackageVersion Include="Jakar.Extensions" Version="10.12.0" />
+    <PackageVersion Include="Jakar.Files" Version="10.1.0" />
     <PackageVersion Include="JetBrains.Annotations" Version="2026.2.0" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="10.0.13" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.13" />
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.13" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="11.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="11.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="11.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.13" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
     <PackageVersion Include="NUnit" Version="5.0.0" />
