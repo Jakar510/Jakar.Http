@@ -254,7 +254,7 @@ public readonly struct WebHandler( WebRequester requester, HttpRequestMessage re
         response.EnsureSuccessStatusCode();
 
         await using Stream stream = await response.Content.ReadAsStreamAsync(token).ConfigureAwait(false);
-        return await stream.FromJson<TValue>(token).ConfigureAwait(false);
+        return await JsonCodec.FromJsonAsync<TValue>(stream, null, token).ConfigureAwait(false);
     }
 
     public static async ValueTask<TValue[]> AsJsonArray<TValue>( HttpResponseMessage response, CancellationToken token )

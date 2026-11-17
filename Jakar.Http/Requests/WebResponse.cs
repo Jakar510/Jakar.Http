@@ -121,7 +121,7 @@ public sealed class WebResponse<TValue>
     }
 
 
-    public Errors GetError() => GetError(StatusCode.GetErrorTitle());
+    public Errors GetError() => GetError(Statuses.GetErrorTitle(StatusCode));
     public Errors GetError( string? title )
     {
         if ( Error.TryCreate(this, title, out Error? error) ) { return error; }
@@ -136,7 +136,7 @@ public sealed class WebResponse<TValue>
         static Errors fromNode( WebResponse<TValue>   response, JNode      node )   => fromString(response, node.ToJson());
         static Errors fromErrors( WebResponse<TValue> response, Errors     errors ) => Extensions.Errors.Create([Error.Create(response.StatusCode), .. errors.Details]);
     }
-    public string ErrorMessage() => StatusCode.GetErrorTitle();
+    public string ErrorMessage() => Statuses.GetErrorTitle(StatusCode);
 
 
     public void EnsureSuccessStatusCode()

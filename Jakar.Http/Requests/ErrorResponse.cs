@@ -26,29 +26,40 @@ public readonly partial struct ErrorResponse( string? text ) : IParsable<ErrorRe
     public static ErrorResponse From( string     input ) => new(input);
     public static ErrorResponse From( Errors     input ) => new(input.ToJson());
     public static ErrorResponse From( StringTags input ) => new(input.ToJson());
-    public static ErrorResponse From( JNode      input ) => new(input.ToJson(false));
+    public static ErrorResponse From( JNode      input ) => new(input.ToJson(JsonWriterOptions.Default));
 
 
-    public StringTags? AsTags() => Text?.TryFromJson<StringTags>();
+    public StringTags? AsTags() => AsJson<StringTags>();
     public bool AsTags( [NotNullWhen(true)] out StringTags? token )
     {
         token = AsTags();
         return token is { IsEmpty: false };
     }
-    public Errors? AsErrors() => Text?.TryFromJson<Errors>();
+    public Errors? AsErrors() => AsJson<Errors>();
     public bool AsErrors( [NotNullWhen(true)] out Errors? token )
     {
         token = AsErrors();
         return token is not null;
     }
-    public JNode? AsJson() => Text?.TryFromJson();
+    /// <summary> <see langword="null"/> for blank text, invalid JSON, or a JSON <c> null </c> root. </summary>
+    public JNode? AsJson()
+    {
+        if ( string.IsNullOrWhiteSpace(Text) ) { return null; }
+
+        if ( JNode.TryParse(Text, out JNode? node, out JsonError error, new JsonReaderOptions { AllowComments = true, AllowTrailingCommas = true }) ) { return node; }
+
+        SelfLogger.WriteLine("Json parsing error: {Error}", error);
+        return null;
+    }
     public bool AsJson( [NotNullWhen(true)] out JNode? token )
     {
         token = AsJson();
         return token is not null;
     }
     public TValue? AsJson<TValue>()
-        where TValue : IJsonSerializable<TValue> => Text.TryFromJson<TValue>();
+        where TValue : IJsonSerializable<TValue> => JsonCodec.TryFromJson<TValue>(Text, out TValue? result)
+                                                        ? result
+                                                        : default;
     public bool AsErrors<TValue>( [NotNullWhen(true)] out TValue? token )
         where TValue : IJsonSerializable<TValue>
     {
